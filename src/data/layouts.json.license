@@ -1,0 +1,5 @@
+SPDX-FileCopyrightText: 2004-2025 Mahjongg Contributors
+SPDX-License-Identifier: GPL-3.0-or-later
+
+Converted from original/gnome-mahjongg-main/data/maps/mahjongg.map;
+src/core/map.test.ts checks that both produce identical layouts.

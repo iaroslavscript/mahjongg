@@ -1,0 +1,18 @@
+# The same layout as little-pyramid.json, written in YAML.
+version: 1
+layouts:
+  - name: Little Pyramid
+    scoreName: little-pyramid
+    layers:
+      - z: 0
+        blocks:
+          - { left: 1, right: 6, top: 0, bottom: 3 }
+        tiles:
+          - { x: 0, y: 1.5 }
+          - { x: 7, y: 1.5 }
+      - z: 1
+        blocks:
+          - { left: 2, right: 5, top: 0.5, bottom: 2.5 }
+      - z: 2
+        rows:
+          - { y: 1.5, left: 3, right: 4 }

@@ -1,0 +1,691 @@
+{
+  "version": 1,
+  "layouts": [
+    {
+      "name": "Turtle",
+      "scoreName": "easy",
+      "layers": [
+        {
+          "z": 0,
+          "rows": [
+            { "y": 0, "left": 1, "right": 12 },
+            { "y": 1, "left": 3, "right": 10 },
+            { "y": 2, "left": 2, "right": 11 },
+            { "y": 3, "left": 1, "right": 12 },
+            { "y": 4, "left": 1, "right": 12 },
+            { "y": 5, "left": 2, "right": 11 },
+            { "y": 6, "left": 3, "right": 10 },
+            { "y": 7, "left": 1, "right": 12 },
+            { "y": 3.5, "left": 13, "right": 14 }
+          ],
+          "tiles": [
+            { "x": 0, "y": 3.5 }
+          ]
+        },
+        {
+          "z": 1,
+          "blocks": [
+            { "left": 4, "right": 9, "top": 1, "bottom": 6 }
+          ]
+        },
+        {
+          "z": 2,
+          "blocks": [
+            { "left": 5, "right": 8, "top": 2, "bottom": 5 }
+          ]
+        },
+        {
+          "z": 3,
+          "blocks": [
+            { "left": 6, "right": 7, "top": 3, "bottom": 4 }
+          ]
+        },
+        {
+          "z": 4,
+          "tiles": [
+            { "x": 6.5, "y": 3.5 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "The Ziggurat",
+      "scoreName": "ziggurat",
+      "layers": [
+        {
+          "z": 0,
+          "rows": [
+            { "y": 0, "left": 3.5, "right": 10.5 },
+            { "y": 7, "left": 3.5, "right": 10.5 }
+          ],
+          "columns": [
+            { "x": 0, "top": 0, "bottom": 7 },
+            { "x": 2.5, "top": 0, "bottom": 2 },
+            { "x": 2.5, "top": 5, "bottom": 7 },
+            { "x": 11.5, "top": 0, "bottom": 2 },
+            { "x": 11.5, "top": 5, "bottom": 7 },
+            { "x": 14, "top": 0, "bottom": 7 }
+          ],
+          "blocks": [
+            { "left": 1, "right": 3, "top": 3, "bottom": 4 },
+            { "left": 6.5, "right": 7.5, "top": 1, "bottom": 2 },
+            { "left": 6.5, "right": 7.5, "top": 5, "bottom": 6 },
+            { "left": 11, "right": 13, "top": 3, "bottom": 4 }
+          ]
+        },
+        {
+          "z": 1,
+          "rows": [
+            { "y": 1, "left": 6.5, "right": 7.5 },
+            { "y": 6, "left": 6.5, "right": 7.5 }
+          ],
+          "blocks": [
+            { "left": 1, "right": 3, "top": 3, "bottom": 4 },
+            { "left": 11, "right": 13, "top": 3, "bottom": 4 }
+          ],
+          "tiles": [
+            { "x": 3, "y": 0.5 },
+            { "x": 11, "y": 0.5 },
+            { "x": 3, "y": 6.5 },
+            { "x": 11, "y": 6.5 }
+          ]
+        },
+        {
+          "z": 2,
+          "blocks": [
+            { "left": 2, "right": 4, "top": 3, "bottom": 4 },
+            { "left": 10, "right": 12, "top": 3, "bottom": 4 }
+          ],
+          "tiles": [
+            { "x": 3, "y": 0.5 },
+            { "x": 11, "y": 0.5 },
+            { "x": 7, "y": 1 },
+            { "x": 7, "y": 6 },
+            { "x": 3, "y": 6.5 },
+            { "x": 11, "y": 6.5 }
+          ]
+        },
+        {
+          "z": 3,
+          "blocks": [
+            { "left": 3, "right": 11, "top": 3, "bottom": 4 }
+          ]
+        },
+        {
+          "z": 4,
+          "blocks": [
+            { "left": 4, "right": 10, "top": 3, "bottom": 4 }
+          ]
+        },
+        {
+          "z": 5,
+          "blocks": [
+            { "left": 5, "right": 9, "top": 3, "bottom": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Four Bridges",
+      "scoreName": "bridges",
+      "layers": [
+        {
+          "z": 0,
+          "rows": [
+            { "y": 0, "left": 1, "right": 11 },
+            { "y": 1, "left": 2, "right": 5 },
+            { "y": 1, "left": 7, "right": 10 },
+            { "y": 2, "left": 2, "right": 10 },
+            { "y": 3, "left": 0, "right": 12 },
+            { "y": 4, "left": 1.5, "right": 3.5 },
+            { "y": 4, "left": 8.5, "right": 10.5 },
+            { "y": 5, "left": 0, "right": 12 },
+            { "y": 6, "left": 2, "right": 10 },
+            { "y": 7, "left": 2, "right": 5 },
+            { "y": 7, "left": 7, "right": 10 },
+            { "y": 8, "left": 1, "right": 11 }
+          ]
+        },
+        {
+          "z": 1,
+          "blocks": [
+            { "left": 2.5, "right": 4.5, "top": 0.5, "bottom": 2.5 },
+            { "left": 7.5, "right": 9.5, "top": 0.5, "bottom": 2.5 },
+            { "left": 2.5, "right": 4.5, "top": 5.5, "bottom": 7.5 },
+            { "left": 7.5, "right": 9.5, "top": 5.5, "bottom": 7.5 }
+          ]
+        },
+        {
+          "z": 2,
+          "blocks": [
+            { "left": 3, "right": 4, "top": 1, "bottom": 2 },
+            { "left": 8, "right": 9, "top": 1, "bottom": 2 },
+            { "left": 3, "right": 4, "top": 6, "bottom": 7 },
+            { "left": 8, "right": 9, "top": 6, "bottom": 7 }
+          ]
+        },
+        {
+          "z": 3,
+          "tiles": [
+            { "x": 3.5, "y": 1.5 },
+            { "x": 8.5, "y": 1.5 },
+            { "x": 3.5, "y": 6.5 },
+            { "x": 8.5, "y": 6.5 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cloud",
+      "scoreName": "cloud",
+      "layers": [
+        {
+          "z": 0,
+          "rows": [
+            { "y": 5.5, "left": 2.5, "right": 10.5 }
+          ],
+          "blocks": [
+            { "left": 0, "right": 13, "top": 0, "bottom": 4 }
+          ]
+        },
+        {
+          "z": 1,
+          "rows": [
+            { "y": 5.5, "left": 3, "right": 10 }
+          ],
+          "columns": [
+            { "x": 0, "top": 0, "bottom": 3 },
+            { "x": 2, "top": 0, "bottom": 3 },
+            { "x": 4, "top": 0, "bottom": 3 },
+            { "x": 6, "top": 0, "bottom": 3 },
+            { "x": 8, "top": 0, "bottom": 3 },
+            { "x": 10, "top": 0, "bottom": 3 },
+            { "x": 12, "top": 0, "bottom": 3 }
+          ]
+        },
+        {
+          "z": 2,
+          "columns": [
+            { "x": 0, "top": 0, "bottom": 3 },
+            { "x": 2, "top": 0, "bottom": 3 },
+            { "x": 4, "top": 0, "bottom": 3 },
+            { "x": 6, "top": 0, "bottom": 3 },
+            { "x": 8, "top": 0, "bottom": 3 },
+            { "x": 10, "top": 0, "bottom": 3 },
+            { "x": 12, "top": 0, "bottom": 3 }
+          ],
+          "tiles": [
+            { "x": 6, "y": 5.5 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tic-Tac-Toe",
+      "scoreName": "tictactoe",
+      "layers": [
+        {
+          "z": 0,
+          "rows": [
+            { "y": 2, "left": 0, "right": 2 },
+            { "y": 6, "left": 0, "right": 2 },
+            { "y": 2, "left": 4, "right": 8 },
+            { "y": 6, "left": 4, "right": 8 },
+            { "y": 2, "left": 10, "right": 12 },
+            { "y": 6, "left": 10, "right": 12 }
+          ],
+          "columns": [
+            { "x": 3, "top": 0, "bottom": 8 },
+            { "x": 9, "top": 0, "bottom": 8 }
+          ]
+        },
+        {
+          "z": 1,
+          "rows": [
+            { "y": 2, "left": 1, "right": 2 },
+            { "y": 6, "left": 1, "right": 2 },
+            { "y": 2, "left": 4, "right": 8 },
+            { "y": 6, "left": 4, "right": 8 },
+            { "y": 2, "left": 10, "right": 11 },
+            { "y": 6, "left": 10, "right": 11 }
+          ],
+          "columns": [
+            { "x": 3, "top": 0, "bottom": 8 },
+            { "x": 9, "top": 0, "bottom": 8 }
+          ]
+        },
+        {
+          "z": 2,
+          "rows": [
+            { "y": 2, "left": 4, "right": 8 },
+            { "y": 6, "left": 4, "right": 8 }
+          ],
+          "columns": [
+            { "x": 3, "top": 1, "bottom": 7 },
+            { "x": 9, "top": 1, "bottom": 7 }
+          ],
+          "tiles": [
+            { "x": 2, "y": 2 },
+            { "x": 2, "y": 6 },
+            { "x": 10, "y": 2 },
+            { "x": 10, "y": 6 }
+          ]
+        },
+        {
+          "z": 3,
+          "rows": [
+            { "y": 2, "left": 4, "right": 8 },
+            { "y": 6, "left": 4, "right": 8 }
+          ],
+          "columns": [
+            { "x": 3, "top": 2, "bottom": 6 },
+            { "x": 9, "top": 2, "bottom": 6 }
+          ]
+        },
+        {
+          "z": 4,
+          "rows": [
+            { "y": 2, "left": 4, "right": 8 },
+            { "y": 6, "left": 4, "right": 8 }
+          ],
+          "columns": [
+            { "x": 3, "top": 2, "bottom": 6 },
+            { "x": 9, "top": 2, "bottom": 6 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Red Dragon",
+      "scoreName": "dragon",
+      "layers": [
+        {
+          "z": 0,
+          "blocks": [
+            { "left": 2, "right": 12, "top": 0, "bottom": 5 }
+          ],
+          "tiles": [
+            { "x": 0, "y": 0 },
+            { "x": 0, "y": 1.5 },
+            { "x": 0, "y": 3 },
+            { "x": 0, "y": 4.5 },
+            { "x": 0, "y": 6 },
+            { "x": 14, "y": 0 },
+            { "x": 14, "y": 1.5 },
+            { "x": 14, "y": 3 },
+            { "x": 14, "y": 4.5 },
+            { "x": 14, "y": 6 },
+            { "x": 2, "y": 6.5 },
+            { "x": 4, "y": 6.5 },
+            { "x": 6, "y": 6.5 },
+            { "x": 8, "y": 6.5 },
+            { "x": 10, "y": 6.5 },
+            { "x": 12, "y": 6.5 }
+          ]
+        },
+        {
+          "z": 1,
+          "columns": [
+            { "x": 11.5, "top": 1.5, "bottom": 3.5 }
+          ],
+          "blocks": [
+            { "left": 3.5, "right": 10.5, "top": 0.5, "bottom": 4.5 }
+          ],
+          "tiles": [
+            { "x": 2.5, "y": 1.5 },
+            { "x": 2.5, "y": 4.5 }
+          ]
+        },
+        {
+          "z": 2,
+          "blocks": [
+            { "left": 5, "right": 8, "top": 1, "bottom": 4 }
+          ],
+          "tiles": [
+            { "x": 11, "y": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Overpass",
+      "scoreName": "overpass",
+      "layers": [
+        {
+          "z": 0,
+          "columns": [
+            { "x": 0, "top": 2, "bottom": 7 },
+            { "x": 11, "top": 2, "bottom": 7 }
+          ],
+          "blocks": [
+            { "left": 4, "right": 7, "top": 0, "bottom": 8 }
+          ],
+          "tiles": [
+            { "x": 1, "y": 2 },
+            { "x": 1, "y": 7 },
+            { "x": 10, "y": 2 },
+            { "x": 10, "y": 7 }
+          ]
+        },
+        {
+          "z": 1,
+          "columns": [
+            { "x": 0, "top": 2, "bottom": 7 },
+            { "x": 1, "top": 3, "bottom": 6 },
+            { "x": 10, "top": 3, "bottom": 6 },
+            { "x": 11, "top": 2, "bottom": 7 }
+          ]
+        },
+        {
+          "z": 2,
+          "blocks": [
+            { "left": 1, "right": 2, "top": 3, "bottom": 6 },
+            { "left": 9, "right": 10, "top": 3, "bottom": 6 }
+          ]
+        },
+        {
+          "z": 3,
+          "blocks": [
+            { "left": 2, "right": 9, "top": 3, "bottom": 6 }
+          ]
+        },
+        {
+          "z": 4,
+          "blocks": [
+            { "left": 3, "right": 8, "top": 3, "bottom": 6 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pyramid's Walls",
+      "scoreName": "pyramid",
+      "layers": [
+        {
+          "z": 0,
+          "rows": [
+            { "y": 0, "left": 0, "right": 11 },
+            { "y": 6, "left": 0, "right": 11 },
+            { "y": 3, "left": 2.5, "right": 8.5 }
+          ],
+          "columns": [
+            { "x": 0, "top": 1, "bottom": 5 },
+            { "x": 11, "top": 1, "bottom": 5 }
+          ]
+        },
+        {
+          "z": 1,
+          "rows": [
+            { "y": 0, "left": 1, "right": 10 },
+            { "y": 6, "left": 1, "right": 10 },
+            { "y": 3, "left": 3, "right": 8 }
+          ],
+          "columns": [
+            { "x": 0, "top": 1.5, "bottom": 4.5 },
+            { "x": 11, "top": 1.5, "bottom": 4.5 }
+          ]
+        },
+        {
+          "z": 2,
+          "rows": [
+            { "y": 0, "left": 2, "right": 9 },
+            { "y": 6, "left": 2, "right": 9 },
+            { "y": 3, "left": 3.5, "right": 7.5 }
+          ],
+          "columns": [
+            { "x": 0, "top": 2, "bottom": 4 },
+            { "x": 11, "top": 2, "bottom": 4 }
+          ]
+        },
+        {
+          "z": 3,
+          "rows": [
+            { "y": 0, "left": 3, "right": 8 },
+            { "y": 6, "left": 3, "right": 8 },
+            { "y": 3, "left": 4, "right": 7 }
+          ],
+          "columns": [
+            { "x": 0, "top": 2.5, "bottom": 3.5 },
+            { "x": 11, "top": 2.5, "bottom": 3.5 }
+          ]
+        },
+        {
+          "z": 4,
+          "rows": [
+            { "y": 0, "left": 4, "right": 7 },
+            { "y": 6, "left": 4, "right": 7 },
+            { "y": 3, "left": 4.5, "right": 6.5 }
+          ],
+          "tiles": [
+            { "x": 0, "y": 3 },
+            { "x": 11, "y": 3 }
+          ]
+        },
+        {
+          "z": 5,
+          "rows": [
+            { "y": 0, "left": 5, "right": 6 },
+            { "y": 6, "left": 5, "right": 6 },
+            { "y": 3, "left": 5, "right": 6 }
+          ]
+        },
+        {
+          "z": 6,
+          "tiles": [
+            { "x": 5.5, "y": 0 },
+            { "x": 5.5, "y": 6 },
+            { "x": 5.5, "y": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Confounding Cross",
+      "scoreName": "confounding",
+      "layers": [
+        {
+          "z": 0,
+          "rows": [
+            { "y": 1, "left": 1, "right": 9 },
+            { "y": 7, "left": 1, "right": 9 },
+            { "y": 4, "left": 2, "right": 8 }
+          ],
+          "columns": [
+            { "x": 1, "top": 2, "bottom": 6 },
+            { "x": 9, "top": 2, "bottom": 6 }
+          ],
+          "tiles": [
+            { "x": 5, "y": 0 },
+            { "x": 5, "y": 8 },
+            { "x": 0, "y": 4 },
+            { "x": 10, "y": 4 },
+            { "x": 2, "y": 2 },
+            { "x": 2, "y": 6 },
+            { "x": 8, "y": 2 },
+            { "x": 8, "y": 6 },
+            { "x": 5, "y": 2 },
+            { "x": 5, "y": 3 },
+            { "x": 5, "y": 5 },
+            { "x": 5, "y": 6 }
+          ]
+        },
+        {
+          "z": 1,
+          "rows": [
+            { "y": 4, "left": 0.5, "right": 3.5 },
+            { "y": 4, "left": 6.5, "right": 9.5 }
+          ],
+          "columns": [
+            { "x": 5, "top": 0.5, "bottom": 2.5 },
+            { "x": 5, "top": 5.5, "bottom": 7.5 }
+          ],
+          "blocks": [
+            { "left": 4.5, "right": 5.5, "top": 3.5, "bottom": 4.5 },
+            { "left": 1, "right": 2, "top": 1, "bottom": 2 },
+            { "left": 8, "right": 9, "top": 1, "bottom": 2 },
+            { "left": 1, "right": 2, "top": 6, "bottom": 7 },
+            { "left": 8, "right": 9, "top": 6, "bottom": 7 }
+          ],
+          "tiles": [
+            { "x": 1, "y": 3 },
+            { "x": 1, "y": 5 },
+            { "x": 9, "y": 3 },
+            { "x": 9, "y": 5 },
+            { "x": 3, "y": 1 },
+            { "x": 3, "y": 7 },
+            { "x": 7, "y": 1 },
+            { "x": 7, "y": 7 }
+          ]
+        },
+        {
+          "z": 2,
+          "rows": [
+            { "y": 4, "left": 1, "right": 9 }
+          ],
+          "columns": [
+            { "x": 5, "top": 1, "bottom": 3 },
+            { "x": 5, "top": 5, "bottom": 7 }
+          ],
+          "tiles": [
+            { "x": 1, "y": 1 },
+            { "x": 1, "y": 2 },
+            { "x": 2, "y": 1 },
+            { "x": 9, "y": 7 },
+            { "x": 9, "y": 6 },
+            { "x": 8, "y": 7 },
+            { "x": 9, "y": 1 },
+            { "x": 9, "y": 2 },
+            { "x": 8, "y": 1 },
+            { "x": 1, "y": 7 },
+            { "x": 1, "y": 6 },
+            { "x": 2, "y": 7 }
+          ]
+        },
+        {
+          "z": 3,
+          "rows": [
+            { "y": 4, "left": 1.5, "right": 3.5 },
+            { "y": 4, "left": 6.5, "right": 8.5 }
+          ],
+          "columns": [
+            { "x": 5, "top": 1.5, "bottom": 2.5 },
+            { "x": 5, "top": 5.5, "bottom": 6.5 }
+          ],
+          "blocks": [
+            { "left": 4.5, "right": 5.5, "top": 3.5, "bottom": 4.5 }
+          ],
+          "tiles": [
+            { "x": 1, "y": 1 },
+            { "x": 9, "y": 7 },
+            { "x": 1, "y": 7 },
+            { "x": 9, "y": 1 }
+          ]
+        },
+        {
+          "z": 4,
+          "rows": [
+            { "y": 4, "left": 3, "right": 7 }
+          ],
+          "columns": [
+            { "x": 5, "top": 2, "bottom": 3 },
+            { "x": 5, "top": 5, "bottom": 6 }
+          ]
+        },
+        {
+          "z": 5,
+          "tiles": [
+            { "x": 5, "y": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Taipei",
+      "scoreName": "difficult",
+      "layers": [
+        {
+          "z": 0,
+          "rows": [
+            { "y": 0, "left": 3, "right": 7 },
+            { "y": 6, "left": 3, "right": 7 },
+            { "y": 1, "left": 2.5, "right": 7.5 },
+            { "y": 5, "left": 2.5, "right": 7.5 }
+          ],
+          "blocks": [
+            { "left": 0.5, "right": 1.5, "top": 0.5, "bottom": 1.5 },
+            { "left": 8.5, "right": 9.5, "top": 0.5, "bottom": 1.5 },
+            { "left": 0.5, "right": 1.5, "top": 4.5, "bottom": 5.5 },
+            { "left": 8.5, "right": 9.5, "top": 4.5, "bottom": 5.5 },
+            { "left": 1, "right": 2, "top": 2.5, "bottom": 3.5 },
+            { "left": 8, "right": 9, "top": 2.5, "bottom": 3.5 },
+            { "left": 3, "right": 7, "top": 2, "bottom": 4 }
+          ],
+          "tiles": [
+            { "x": 0, "y": 3 },
+            { "x": 10, "y": 3 }
+          ]
+        },
+        {
+          "z": 1,
+          "rows": [
+            { "y": 1, "left": 1, "right": 3 },
+            { "y": 5, "left": 1, "right": 3 },
+            { "y": 1, "left": 7, "right": 9 },
+            { "y": 5, "left": 7, "right": 9 },
+            { "y": 0.5, "left": 4.5, "right": 5.5 },
+            { "y": 1.5, "left": 4, "right": 6 },
+            { "y": 4.5, "left": 4, "right": 6 },
+            { "y": 5.5, "left": 4.5, "right": 5.5 }
+          ],
+          "blocks": [
+            { "left": 1.5, "right": 2.5, "top": 2, "bottom": 4 },
+            { "left": 7.5, "right": 8.5, "top": 2, "bottom": 4 },
+            { "left": 3.5, "right": 6.5, "top": 2.5, "bottom": 3.5 }
+          ],
+          "tiles": [
+            { "x": 3.5, "y": 0 },
+            { "x": 6.5, "y": 0 },
+            { "x": 3.5, "y": 6 },
+            { "x": 6.5, "y": 6 }
+          ]
+        },
+        {
+          "z": 2,
+          "rows": [
+            { "y": 2, "left": 2.5, "right": 7.5 },
+            { "y": 3, "left": 2, "right": 8 },
+            { "y": 4, "left": 2.5, "right": 7.5 }
+          ]
+        },
+        {
+          "z": 3,
+          "blocks": [
+            { "left": 3.5, "right": 6.5, "top": 2.5, "bottom": 3.5 }
+          ],
+          "tiles": [
+            { "x": 2.5, "y": 3 },
+            { "x": 7.5, "y": 3 }
+          ]
+        },
+        {
+          "z": 4,
+          "rows": [
+            { "y": 3, "left": 4, "right": 6 }
+          ]
+        },
+        {
+          "z": 5,
+          "rows": [
+            { "y": 3, "left": 4.5, "right": 5.5 }
+          ]
+        },
+        {
+          "z": 6,
+          "tiles": [
+            { "x": 5, "y": 3 }
+          ]
+        }
+      ]
+    }
+  ]
+}

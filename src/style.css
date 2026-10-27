@@ -1,0 +1,1083 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Mahjongg Contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+:root {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: #f3efe4;
+  background: #17302a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  color-scheme: dark light;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Theme tokens; light-dark() follows the color-scheme chosen by the Background preference. */
+.app-shell {
+  --felt-center: light-dark(#eef1e6, #2e5a48);
+  --felt-middle: light-dark(#d6e0d2, #1f4134);
+  --felt-edge: light-dark(#b7c7b4, #122820);
+  --text: light-dark(#1b2a22, #f3efe4);
+  --text-muted: light-dark(#53665b, #b4c6bb);
+  --surface: light-dark(rgb(255 255 255 / 62%), rgb(255 255 255 / 7%));
+  --surface-hover: light-dark(rgb(255 255 255 / 92%), rgb(255 255 255 / 14%));
+  --surface-active: light-dark(rgb(20 50 35 / 10%), rgb(255 255 255 / 20%));
+  --border: light-dark(rgb(20 50 35 / 13%), rgb(255 255 255 / 12%));
+  --popover: light-dark(rgb(252 251 247 / 94%), rgb(24 44 36 / 92%));
+  --field: light-dark(#ffffff, rgb(0 0 0 / 22%));
+  --accent: light-dark(#d9a832, #f0c75e);
+  --accent-hover: light-dark(#e6b84a, #f6d47c);
+  --accent-text: #1f1a0b;
+  --danger: light-dark(#b93a3a, #c94b4b);
+  --shadow: light-dark(0 12px 32px rgb(30 50 40 / 18%), 0 12px 32px rgb(0 0 0 / 40%));
+  --thumb-base: light-dark(#fdfbf4, #e9e3d2);
+  --thumb-top: light-dark(#e2b14a, #f0c75e);
+  --thumb-edge: light-dark(#7d8f83, #0f2018);
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  color: var(--text);
+  background: radial-gradient(ellipse 120% 90% at 50% 40%, var(--felt-center) 0%, var(--felt-middle) 55%, var(--felt-edge) 100%);
+  color-scheme: dark;
+  container: app / inline-size;
+}
+
+.app-shell[data-background='light'] {
+  color-scheme: light;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+/* Controls */
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  color: inherit;
+  background: var(--surface);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 120ms ease, transform 120ms ease, opacity 120ms ease;
+}
+
+button:hover:not(:disabled) {
+  background: var(--surface-hover);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+button .icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+button.suggested {
+  border-color: transparent;
+  color: var(--accent-text);
+  background: var(--accent);
+}
+
+button.suggested:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+button.destructive {
+  border-color: transparent;
+  color: #fff;
+  background: var(--danger);
+}
+
+button.destructive:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--danger) 85%, #fff);
+}
+
+.icon-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  min-height: 0;
+  padding: 0;
+  border-color: transparent;
+  border-radius: 0.8rem;
+  background: transparent;
+}
+
+.icon-button .icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+select,
+input:not([type='file']) {
+  min-height: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  color: inherit;
+  background: var(--field);
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+canvas:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Header */
+
+.update-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.4rem;
+  color: var(--accent-text);
+  background: var(--accent);
+}
+
+.update-banner button {
+  min-height: 2rem;
+  padding: 0.25rem 0.8rem;
+  border-color: transparent;
+  color: #fff;
+  background: #1f3a2f;
+}
+
+.app-header {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem 0.25rem;
+}
+
+.layout-button,
+.game-stats,
+.header-actions {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
+}
+
+.layout-button {
+  justify-self: start;
+  max-width: 100%;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.75rem 0.4rem 1.1rem;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+#layout-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layout-button .icon {
+  color: var(--text-muted);
+}
+
+.game-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: 999px;
+}
+
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--border);
+}
+
+.stat .icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--text-muted);
+}
+
+.stat strong {
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.15rem;
+  padding: 0.2rem;
+  border-radius: 1rem;
+}
+
+/* Main menu */
+
+.main-menu {
+  position: relative;
+}
+
+.main-menu .icon-button[aria-expanded='true'] {
+  background: var(--surface-active);
+}
+
+.menu-popup {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: -0.2rem;
+  z-index: 20;
+  display: grid;
+  min-width: 18rem;
+  padding: 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--popover);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  animation: pop-in 140ms ease-out;
+  transform-origin: top right;
+}
+
+.menu-popup [role='menuitem'] {
+  justify-content: flex-start;
+  gap: 0.75rem;
+  min-height: 2.5rem;
+  padding: 0.45rem 0.7rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: transparent;
+  text-align: left;
+  font-weight: 450;
+}
+
+.menu-popup [role='menuitem']:hover:not(:disabled),
+.menu-popup [role='menuitem']:focus-visible {
+  outline: none;
+  background: var(--surface-active);
+}
+
+.menu-popup [role='menuitem']:active:not(:disabled) {
+  transform: none;
+}
+
+.menu-popup [role='menuitem'] .icon {
+  color: var(--text-muted);
+}
+
+.menu-label {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.menu-popup kbd {
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.8rem;
+}
+
+.menu-popup [role='separator'] {
+  height: 1px;
+  margin: 0.3rem 0.5rem;
+  background: var(--border);
+}
+
+/* Board */
+
+.game-main {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.25rem 0.75rem 0.75rem;
+}
+
+.board-frame {
+  position: relative;
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  /* Fixed tracks so the canvas buffer size cannot keep the board taller than the window. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  border-radius: 1rem;
+  touch-action: none;
+}
+
+/* Keyboard focus on the board is shown by the glow of the selected tile. */
+#board:focus-visible {
+  outline: none;
+}
+
+/* Dialogs only pause a started game, so blur the board for every open dialog too. */
+.board-frame.paused #board,
+.app-shell:has(dialog[open]) #board {
+  filter: blur(8px) saturate(0.7);
+}
+
+.finish-chip {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  z-index: 5;
+  min-height: 2.6rem;
+  padding: 0.5rem 1.2rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--accent-text);
+  background: var(--accent);
+  box-shadow: var(--shadow);
+  font-weight: 650;
+  transform: translateX(-50%);
+  animation: chip-in 220ms ease-out;
+}
+
+.finish-chip:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.finish-chip:active:not(:disabled) {
+  transform: translateX(-50%) scale(0.97);
+}
+
+.pause-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: light-dark(rgb(240 240 230 / 25%), rgb(5 15 10 / 30%));
+  pointer-events: none;
+  animation: fade-in 160ms ease-out;
+}
+
+.pause-card {
+  display: grid;
+  width: min(23rem, 100%);
+  gap: 0.6rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: var(--popover);
+  box-shadow: var(--shadow);
+  text-align: center;
+  pointer-events: auto;
+}
+
+.pause-card h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.pause-card p {
+  margin: 0 0 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Toasts */
+
+.toast-region {
+  position: fixed;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  left: 50%;
+  z-index: 30;
+  display: grid;
+  width: min(34rem, calc(100vw - 1.5rem));
+  gap: 0.5rem;
+  justify-items: center;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.4rem 0.4rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--popover);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  pointer-events: auto;
+  animation: toast-in 200ms ease-out;
+}
+
+.toast-message {
+  margin-right: 0.35rem;
+}
+
+.toast-error {
+  border-color: color-mix(in srgb, var(--danger) 70%, transparent);
+  border-radius: 1rem;
+}
+
+.toast-error .toast-message::before {
+  content: '';
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.55rem;
+  border-radius: 50%;
+  background: var(--danger);
+  vertical-align: 0.05rem;
+}
+
+.toast-action {
+  min-height: 2.1rem;
+  padding: 0.3rem 0.85rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--accent-text);
+  background: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.toast-action:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.toast-close {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  color: var(--text-muted);
+}
+
+.toast-close .icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.fatal-error {
+  margin: 2rem;
+  padding: 1rem;
+  border: 1px solid currentColor;
+  border-radius: 0.75rem;
+  color: #ffc8c8;
+}
+
+/* Dialogs */
+
+.app-dialog {
+  width: min(38rem, calc(100vw - 2rem));
+  max-height: min(85vh, 48rem);
+  overflow: auto;
+  padding: 1.1rem 1.5rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  color: var(--text);
+  background: var(--popover);
+  box-shadow: var(--shadow);
+}
+
+.app-dialog[open] {
+  animation: dialog-in 180ms ease-out;
+}
+
+.app-dialog::backdrop {
+  background: rgb(0 0 0 / 45%);
+}
+
+.app-dialog form > header {
+  position: sticky;
+  top: -1.1rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: -1.1rem -1.5rem 0.5rem;
+  padding: 1rem 1rem 0.5rem 1.5rem;
+  /* --popover is translucent; layer it twice so content scrolling underneath stays hidden. */
+  background: linear-gradient(var(--popover)), var(--popover);
+}
+
+.app-dialog h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.alert-dialog h2 {
+  margin-bottom: 0.5rem;
+}
+
+.app-dialog p {
+  line-height: 1.5;
+}
+
+.app-dialog label {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.9rem 0;
+  font-weight: 500;
+}
+
+.app-dialog select,
+.app-dialog input:not([type='file']) {
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  font-weight: 400;
+}
+
+.app-dialog menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+}
+
+.close-button {
+  color: var(--text-muted);
+}
+
+.close-button:hover:not(:disabled) {
+  background: var(--surface-active);
+}
+
+.app-dialog h3 {
+  margin: 1.2rem 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.app-dialog fieldset {
+  margin: 0 0 1rem;
+  padding: 0.5rem 1rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+.app-dialog legend {
+  padding: 0 0.4rem;
+  font-weight: 650;
+}
+
+.layout-actions,
+.theme-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.alert-dialog {
+  width: min(26rem, calc(100vw - 2rem));
+}
+
+.rule-list {
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 1.3rem;
+}
+
+.rule-list span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.app-dialog .tile-groups-tileset,
+.app-dialog .tile-groups-help {
+  margin: 0.25rem 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.app-dialog .tile-groups-help {
+  min-height: 3em;
+}
+
+.tile-groups {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.tile-group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.tile-group-header strong,
+.tile-group-header span:not(.tile-group-badge) {
+  display: block;
+}
+
+.tile-group-header span:not(.tile-group-badge) {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.tile-group-badge {
+  display: grid;
+  flex: none;
+  place-items: center;
+  min-width: 2.2rem;
+  height: 1.6rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  color: var(--accent-text);
+  background: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.6rem, 1fr));
+  gap: 0.35rem;
+}
+
+.tile-face {
+  display: block;
+  width: 100%;
+  max-width: 3.4rem;
+  min-height: 0;
+  aspect-ratio: 64 / 88;
+  padding: 0;
+  border: 0;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: opacity 120ms ease-out, transform 120ms ease-out;
+}
+
+/* Also overrides the generic button:hover background. */
+.tile-face,
+.tile-face:hover:not(:disabled) {
+  background: var(--tileset-image) no-repeat var(--sprite-x) 0 / 4300% 200%;
+}
+
+.tile-face.matches,
+.tile-face.matches:hover:not(:disabled) {
+  background-position-y: 100%;
+  transform: translateY(-0.15rem);
+}
+
+.tile-face[aria-pressed='true'] {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.has-tile-highlight .tile-face:not(.matches) {
+  opacity: 0.35;
+}
+
+.app-dialog .tile-order-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.app-dialog .tile-order-options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.app-dialog .tile-order-options label:has(:checked) {
+  border-color: var(--accent);
+}
+
+.app-dialog .tile-order-options input[type='radio'] {
+  flex: none;
+  width: auto;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  accent-color: var(--accent);
+}
+
+.tile-order-options small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.app-dialog .tile-order-declared {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.shortcuts-list {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) 1fr;
+  gap: 0.6rem 1rem;
+}
+
+.shortcuts-list dt {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.shortcuts-list dd {
+  margin: 0;
+}
+
+/* Scores and the win card */
+
+#scores-content {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+#scores-content table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+#scores-content th {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+#scores-content th,
+#scores-content td {
+  padding: 0.55rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.completed-score {
+  font-weight: 700;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.completed-score input {
+  width: 100%;
+  padding: 0.25rem 0.4rem;
+}
+
+#clear-scores {
+  margin-top: 1rem;
+}
+
+.win-dialog > form > header {
+  justify-content: flex-end;
+}
+
+.win-dialog h2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.win-hero {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  margin: 0.75rem 0 0.5rem;
+  text-align: center;
+}
+
+.win-icon {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  margin-bottom: 0.35rem;
+  border-radius: 50%;
+  color: var(--accent-text);
+  background: var(--accent);
+  box-shadow: 0 0 0 0.5rem color-mix(in srgb, var(--accent) 25%, transparent);
+  animation: win-pop 500ms cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+.win-icon .icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.win-time {
+  font-size: 2.6rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.win-details {
+  color: var(--text-muted);
+}
+
+/* Layout picker */
+
+.layout-dialog {
+  width: min(48rem, calc(100vw - 2rem));
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.layout-card {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  align-content: start;
+  justify-items: start;
+  gap: 0.2rem;
+  padding: 0.6rem 0.6rem 0.75rem;
+  border-radius: 1rem;
+  text-align: left;
+}
+
+.layout-card[aria-current='true'] {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+}
+
+.layout-thumbnail {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 0.4rem;
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--felt-middle) 85%, transparent);
+}
+
+.thumb-tile {
+  fill: color-mix(in oklab, var(--thumb-top) calc(var(--layer) * 70%), var(--thumb-base));
+  stroke: var(--thumb-edge);
+  stroke-width: 0.14;
+}
+
+.layout-card-name {
+  font-size: 0.95rem;
+}
+
+.layout-card-details {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* Animations */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -0.5rem);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.98);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes win-pop {
+  from {
+    transform: scale(0.4);
+  }
+}
+
+/* Phones: two-row header; dialogs become bottom sheets. */
+@container app (max-width: 640px) {
+  .app-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem 0.25rem;
+  }
+
+  .layout-button {
+    min-height: 2.5rem;
+    padding: 0.35rem 0.6rem 0.35rem 0.9rem;
+    font-size: 1rem;
+  }
+
+  .game-stats {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: center;
+    padding: 0.15rem 0.3rem;
+  }
+
+  .stat {
+    padding: 0.15rem 0.6rem;
+  }
+
+  .stat strong {
+    font-size: 0.95rem;
+  }
+
+  .stat-label {
+    display: none;
+  }
+
+  .header-actions {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 0;
+  }
+
+  .icon-button {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .game-main {
+    padding: 0.25rem 0.25rem 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-dialog {
+    width: 100%;
+    max-width: 100%;
+    max-height: 88dvh;
+    margin: auto 0 0;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+    border-width: 1px 0 0;
+    border-radius: 1.4rem 1.4rem 0 0;
+  }
+
+  .app-dialog[open] {
+    animation: sheet-in 220ms ease-out;
+  }
+
+  .layout-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .toast {
+    border-radius: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
