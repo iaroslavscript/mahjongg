@@ -5,3 +5,7 @@
 /// <reference types="vite-plugin-pwa/client" />
 
 declare const __APP_VERSION__: string;
+/** Full git commit hash the build was made from, or '' when unknown. */
+declare const __APP_COMMIT__: string;
+/** True when the build included uncommitted changes to tracked files. */
+declare const __APP_COMMIT_DIRTY__: boolean;

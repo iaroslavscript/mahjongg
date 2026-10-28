@@ -62,10 +62,47 @@ export class RulesDialog {
   }
 }
 
-/** Credits from Mahjongg.about_cb (). */
-export function createAboutDialog(version: string): HTMLDialogElement {
+export const SOURCE_URL = 'https://github.com/iaroslavscript/mahjongg';
+export const LICENSE_URL = 'https://www.gnu.org/licenses/gpl-3.0.html';
+
+export interface BuildInfo {
+  version: string;
+  /** Full git commit hash, or '' when unknown. */
+  commit: string;
+  commitDirty: boolean;
+}
+
+function link(href: string, text: string): HTMLAnchorElement {
+  const anchor = document.createElement('a');
+  anchor.href = href;
+  anchor.textContent = text;
+  anchor.target = '_blank';
+  anchor.rel = 'noopener noreferrer';
+  return anchor;
+}
+
+function paragraph(...parts: Array<string | Node>): HTMLParagraphElement {
+  const p = document.createElement('p');
+  p.append(...parts);
+  return p;
+}
+
+function strong(text: string): HTMLElement {
+  const element = document.createElement('strong');
+  element.textContent = text;
+  return element;
+}
+
+function heading(text: string): HTMLHeadingElement {
+  const element = document.createElement('h3');
+  element.textContent = text;
+  return element;
+}
+
+/** Port credits, then the original credits from Mahjongg.about_cb (), then build and license details. */
+export function createAboutDialog({ version, commit, commitDirty }: BuildInfo): HTMLDialogElement {
   const { dialog, body } = createDialog('about-dialog', 'About Mahjongg');
-  const sections: Array<[string, string[]]> = [
+  const originalSections: Array<[string, string[]]> = [
     ['Developers', [
       'Francisco Bustamante', 'Max Watson', 'Heinz Hempe', 'Michael Meeks', 'Philippe Chavin',
       'Callum McKenzie', 'Robert Ancell', 'Michael Catanzaro', 'Mario Wenzel', 'Arnaud Bonatti',
@@ -79,22 +116,38 @@ export function createAboutDialog(version: string): HTMLDialogElement {
     ['Layouts by', ['Rexford Newbould', 'Krzysztof Foltman', 'Sapphire Becker']],
   ];
 
-  const intro = document.createElement('p');
-  intro.textContent = `Version ${version}. A web port of GNOME Mahjongg, a disassembly game ` +
-    'that clears the board by matching pairs of tiles.';
-  const copyright = document.createElement('p');
-  copyright.textContent = 'Copyright © 1998–2026 Mahjongg Contributors. ' +
-    'Copyright © 1998–2008 Free Software Foundation, Inc.';
-  const license = document.createElement('p');
-  license.textContent = 'This program is free software, licensed under the GNU General Public License, ' +
-    'version 3 or later (GPL-3.0-or-later). It comes with absolutely no warranty.';
-  body.append(intro, copyright, license);
-  for (const [title, names] of sections) {
-    const heading = document.createElement('h3');
-    heading.textContent = title;
-    const list = document.createElement('p');
-    list.textContent = names.join(', ');
-    body.append(heading, list);
+  const credit = paragraph(
+    'Web port of GNOME Mahjongg by ', strong('Iaroslav Akimov'),
+    ', co-authored with ', strong('Claude Opus 5.5'), '.',
+  );
+  credit.className = 'about-credit';
+  body.append(
+    credit,
+    paragraph('A disassembly game: clear the board by matching pairs of tiles.'),
+    heading('Original GNOME Mahjongg authors'),
+  );
+  for (const [title, names] of originalSections) {
+    body.append(paragraph(strong(`${title}: `), names.join(', ')));
   }
+
+  const build = commit
+    ? [', built from commit ', link(`${SOURCE_URL}/tree/${commit}`, commit.slice(0, 7)),
+      commitDirty ? ' with uncommitted changes' : '']
+    : [];
+  body.append(
+    heading('Build'),
+    paragraph(`Version ${version}`, ...build, '.'),
+    heading('License'),
+    paragraph(
+      'Copyright © 1998–2026 Mahjongg Contributors. ',
+      'Copyright © 1998–2008 Free Software Foundation, Inc.',
+    ),
+    paragraph(
+      'This program is free software, licensed under the ',
+      link(LICENSE_URL, 'GNU General Public License, version 3 or later'),
+      ' (GPL-3.0-or-later). It comes with absolutely no warranty.',
+    ),
+    paragraph('Source code: ', link(SOURCE_URL, SOURCE_URL)),
+  );
   return dialog;
 }

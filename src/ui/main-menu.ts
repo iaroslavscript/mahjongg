@@ -8,6 +8,7 @@ interface MenuItem {
   label: string;
   icon: IconName;
   shortcut?: string;
+  hidden?: boolean;
 }
 
 /** Groups of the original primary menu; Save is gone because the game autosaves. */
@@ -28,6 +29,7 @@ const MENU_GROUPS: ReadonlyArray<readonly MenuItem[]> = [
     { action: 'rules', label: 'Rules', icon: 'book-open', shortcut: 'F1' },
     { action: 'shortcuts', label: 'Keyboard Shortcuts', icon: 'keyboard', shortcut: 'Ctrl+?' },
     { action: 'about', label: 'About Mahjongg', icon: 'info' },
+    { action: 'install', label: 'Install App', icon: 'monitor-down', hidden: true },
   ],
 ];
 
@@ -68,6 +70,7 @@ export class MainMenu {
         button.type = 'button';
         button.setAttribute('role', 'menuitem');
         button.dataset.action = item.action;
+        button.hidden = item.hidden ?? false;
         button.innerHTML = `${icon(item.icon)}<span class="menu-label"></span>` +
           (item.shortcut ? `<kbd>${item.shortcut}</kbd>` : '');
         button.querySelector('.menu-label')!.textContent = item.label;
@@ -124,7 +127,7 @@ export class MainMenu {
   }
 
   private items(): HTMLButtonElement[] {
-    return [...this.menu.querySelectorAll<HTMLButtonElement>('[role="menuitem"]')].filter((item) => !item.disabled);
+    return [...this.menu.querySelectorAll<HTMLButtonElement>('[role="menuitem"]')].filter((item) => !item.disabled && !item.hidden);
   }
 
   private onKeyDown = (event: KeyboardEvent): void => {

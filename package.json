@@ -1,6 +1,6 @@
 {
   "name": "github-mahjongg",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "devEngines": {
@@ -18,11 +18,12 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "oxlint .",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "original:fetch": "test -d original/gnome-mahjongg-main || git -c advice.detachedHead=false clone --quiet --depth 1 --branch 51.1 https://gitlab.gnome.org/GNOME/gnome-mahjongg.git original/gnome-mahjongg-main",
+    "test": "pnpm original:fetch && vitest run",
+    "test:watch": "pnpm original:fetch && vitest",
     "test:e2e": "playwright test",
-    "verify:seeds": "bash verification/verify-seeds.sh",
-    "clean": "rm -rf tmp .cpuprofile dist test-results playwright-report blob-report .playwright"
+    "verify:seeds": "pnpm original:fetch && bash verification/verify-seeds.sh",
+    "clean": "rm -rf original tmp .cpuprofile dist test-results playwright-report blob-report .playwright"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",

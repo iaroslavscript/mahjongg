@@ -13,6 +13,9 @@ blob-report/
 .playwright/
 *.tsbuildinfo
 
+# Upstream GNOME Mahjongg sources, fetched by `pnpm original:fetch`.
+original/
+
 # Temporary files
 tmp/
 

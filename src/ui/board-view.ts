@@ -45,6 +45,9 @@ const MIN_TILE_SHAKE_AMPLITUDE = 3;
 const TILE_SHAKE_SCALE_FACTOR = 0.04;
 const TILE_FADE_DURATION_MS = 280;
 const HINT_PULSE_PERIOD_MS = 2 * HINT_BLINK_INTERVAL_MS;
+const SELECTION_GLOW_COLOR = '#ffcf4a';
+// A saturated hue distinct from the selection glow, ivory tiles and both felt backgrounds.
+const HINT_GLOW_COLOR = '#00a2ff';
 const MAX_ZOOM = 4;
 const DRAG_THRESHOLD_PX = 8;
 const DOUBLE_TAP_MS = 350;
@@ -264,7 +267,7 @@ export class BoardView {
 
     if (!paused) {
       if (selected?.visible) {
-        this.drawGlow(selected, 1);
+        this.drawGlow(selected, 1, SELECTION_GLOW_COLOR);
       }
       if (hint) {
         const pulse = reducedMotion
@@ -272,7 +275,7 @@ export class BoardView {
           : 0.5 - 0.5 * Math.cos(2 * Math.PI * (now - this.hintStart) / HINT_PULSE_PERIOD_MS);
         for (const tile of [hint.tile0, hint.tile1]) {
           if (tile !== selected && tile.visible) {
-            this.drawGlow(tile, 0.25 + 0.75 * pulse);
+            this.drawGlow(tile, 0.4 + 0.6 * pulse, HINT_GLOW_COLOR);
           }
         }
       }
@@ -375,7 +378,7 @@ export class BoardView {
   }
 
   /** Draws a soft glowing outline around the face of a tile. */
-  private drawGlow(tile: Tile, strength: number): void {
+  private drawGlow(tile: Tile, strength: number, color: string): void {
     const layout = this.layout!;
     const bounds = getTileBounds(tile, layout);
     const x = bounds.x + layout.layerOffsetX + tile.shakeOffset;
@@ -394,7 +397,7 @@ export class BoardView {
     // Layered translucent strokes give a soft glow far more cheaply than shadowBlur.
     for (const [scale, alpha] of [[5, 0.12], [3, 0.25], [1, 1]] as const) {
       context.globalAlpha = strength * alpha;
-      context.strokeStyle = '#ffcf4a';
+      context.strokeStyle = color;
       context.lineWidth = lineWidth * scale;
       context.stroke();
     }

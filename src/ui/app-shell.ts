@@ -17,6 +17,7 @@ import {
   saveGame,
 } from '../core/save';
 import { LayoutLibrary } from '../layouts';
+import type { InstallApp } from '../pwa';
 import { DEFAULT_SETTINGS, loadSettings, saveSettings, type AppSettings } from '../settings';
 import { ThemeLibrary, type ImportedTheme } from '../themes';
 import { chooseAlert } from './alert-dialog';
@@ -48,7 +49,11 @@ export class AppShell {
   private readonly rules = new RulesDialog();
   private readonly tileOrder: TileOrderDialog;
   private readonly shortcutsDialog = createShortcutsDialog();
-  private readonly aboutDialog = createAboutDialog(__APP_VERSION__);
+  private readonly aboutDialog = createAboutDialog({
+    version: __APP_VERSION__,
+    commit: __APP_COMMIT__,
+    commitDirty: __APP_COMMIT_DIRTY__,
+  });
   private readonly toasts = new ToastHost();
   private readonly menu = new MainMenu();
   private readonly layoutPicker: LayoutPicker;
@@ -63,6 +68,7 @@ export class AppShell {
   private game!: Game;
   private board!: BoardView;
   private updateHandler: ((reloadPage?: boolean) => Promise<void>) | undefined;
+  private installHandler: InstallApp | null = null;
   private timer = 0;
   private handledGame: Game | null = null;
   /** True while the game is paused only because a dialog is visible (window.vala). */
@@ -164,6 +170,12 @@ export class AppShell {
 
   setUpdateHandler(handler: (reloadPage?: boolean) => Promise<void>): void {
     this.updateHandler = handler;
+  }
+
+  /** Shows the "Install App" menu entry while the browser allows installing from the page. */
+  setInstallHandler(handler: InstallApp | null): void {
+    this.installHandler = handler;
+    this.menu.item('install').hidden = handler === null;
   }
 
   notifyUpdateAvailable(): void {
@@ -518,6 +530,11 @@ export class AppShell {
           throw new Error('The service worker update handler is unavailable.');
         }
         await this.updateHandler(true);
+        break;
+      case 'install':
+        if (this.installHandler && await this.installHandler()) {
+          this.toasts.show('Mahjongg is being installed.');
+        }
         break;
       case 'dismiss-update':
         element<HTMLElement>(this.root, '#update-banner').hidden = true;

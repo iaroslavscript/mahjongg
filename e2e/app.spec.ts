@@ -93,6 +93,32 @@ test('blurs the board behind dialogs even before the game is started', async ({ 
   await expect(board).toHaveCSS('filter', 'none');
 });
 
+test('offers an Install App menu entry only while the browser allows installing', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#board')).toBeVisible();
+  await page.getByRole('button', { name: 'Main Menu' }).click();
+  await expect(page.getByRole('menuitem', { name: 'Install App' })).toBeHidden();
+  await page.keyboard.press('Escape');
+
+  const prevented = await page.evaluate(() => {
+    const event = Object.assign(new Event('beforeinstallprompt', { cancelable: true }), {
+      prompt: async () => {
+        (window as unknown as { prompted: boolean }).prompted = true;
+      },
+      userChoice: Promise.resolve({ outcome: 'accepted' }),
+    });
+    window.dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+  expect(prevented).toBe(true);
+
+  await openMenuItem(page, 'Install App');
+  expect(await page.evaluate(() => (window as unknown as { prompted?: boolean }).prompted)).toBe(true);
+  await expect(toast(page, 'Mahjongg is being installed.')).toBeVisible();
+  await page.getByRole('button', { name: 'Main Menu' }).click();
+  await expect(page.getByRole('menuitem', { name: 'Install App' })).toBeHidden();
+});
+
 test('serves its install manifest and app shell from cache while offline', async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => navigator.serviceWorker.ready);
@@ -113,19 +139,23 @@ test('serves its install manifest and app shell from cache while offline', async
       throw new Error(`Manifest request failed with ${response.status}.`);
     }
     return response.json() as Promise<{
+      id: string;
       name: string;
       display: string;
       icons: Array<{ src: string; purpose?: string }>;
+      screenshots: Array<{ src: string; form_factor?: string }>;
     }>;
   });
+  expect(manifest.id).toBeTruthy();
   expect(manifest.name).toBe('Mahjongg');
   expect(manifest.display).toBe('standalone');
   expect(manifest.icons.some((icon) => icon.purpose === 'maskable')).toBe(true);
-  for (const icon of manifest.icons) {
+  expect(manifest.screenshots.map((shot) => shot.form_factor).sort()).toEqual(['narrow', 'wide']);
+  for (const { src } of [...manifest.icons, ...manifest.screenshots]) {
     const available = await page.evaluate(async (src) => {
       const response = await fetch(new URL(src, document.querySelector('link[rel="manifest"]')!.href));
       return response.ok;
-    }, icon.src);
+    }, src);
     expect(available).toBe(true);
   }
 
