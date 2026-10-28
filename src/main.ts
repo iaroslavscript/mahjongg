@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import './style.css';
-import { registerPwa } from './pwa';
+import { registerPwa, watchInstallPrompt } from './pwa';
 import { AppShell } from './ui/app-shell';
 
 const app = document.querySelector<HTMLDivElement>('#app');
@@ -16,6 +16,7 @@ shell.setUpdateHandler(registerPwa(
   () => shell.notifyUpdateAvailable(),
   () => shell.notifyOfflineReady(),
 ));
+watchInstallPrompt((install) => shell.setInstallHandler(install));
 void shell.start().catch((error: unknown) => {
   const message = document.createElement('p');
   message.setAttribute('role', 'alert');

@@ -40,6 +40,7 @@ body {
   --border: light-dark(rgb(20 50 35 / 13%), rgb(255 255 255 / 12%));
   --popover: light-dark(rgb(252 251 247 / 94%), rgb(24 44 36 / 92%));
   --field: light-dark(#ffffff, rgb(0 0 0 / 22%));
+  --field-popup: light-dark(#ffffff, #1c3329);
   --accent: light-dark(#d9a832, #f0c75e);
   --accent-hover: light-dark(#e6b84a, #f6d47c);
   --accent-text: #1f1a0b;
@@ -163,6 +164,13 @@ input:not([type='file']) {
   border-radius: 0.65rem;
   color: inherit;
   background: var(--field);
+}
+
+/* The native popup cannot render the translucent field color, so give options an opaque one. */
+select option,
+select optgroup {
+  color: var(--text);
+  background-color: var(--field-popup);
 }
 
 button:focus-visible,
@@ -582,6 +590,22 @@ canvas:focus-visible {
 
 .app-dialog p {
   line-height: 1.5;
+}
+
+.app-dialog a {
+  color: inherit;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+.app-dialog a:hover {
+  text-decoration-color: currentColor;
+}
+
+.about-credit {
+  font-size: 1.05rem;
 }
 
 .app-dialog label {

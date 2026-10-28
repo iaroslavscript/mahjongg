@@ -2,10 +2,39 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import { afterEach, describe, expect, it } from 'vitest';
-import { RulesDialog } from './rules';
+import { createAboutDialog, LICENSE_URL, RulesDialog, SOURCE_URL } from './rules';
 
 afterEach(() => {
   document.body.replaceChildren();
+});
+
+describe('about dialog', () => {
+  const commit = '0123456789abcdef0123456789abcdef01234567';
+
+  it('credits the port first, then the original authors, with build, license and source links', () => {
+    const dialog = createAboutDialog({ version: '1.2.3', commit, commitDirty: false });
+    const paragraphs = [...dialog.querySelectorAll('p')].map((p) => p.textContent);
+    expect(paragraphs[0]).toBe('Web port of GNOME Mahjongg by Iaroslav Akimov, co-authored with Claude Opus 5.5.');
+    expect([...dialog.querySelectorAll('h3')].map((h) => h.textContent))
+      .toEqual(['Original GNOME Mahjongg authors', 'Build', 'License']);
+    expect(dialog.textContent).toContain('Developers: Francisco Bustamante');
+    expect(dialog.textContent).toContain('Version 1.2.3, built from commit 0123456.');
+
+    const links = [...dialog.querySelectorAll('a')].map((a) => [a.textContent, a.href]);
+    expect(links).toEqual([
+      ['0123456', `${SOURCE_URL}/tree/${commit}`],
+      ['GNU General Public License, version 3 or later', LICENSE_URL],
+      [SOURCE_URL, SOURCE_URL],
+    ]);
+  });
+
+  it('flags uncommitted changes and omits the commit when unknown', () => {
+    expect(createAboutDialog({ version: '1.2.3', commit, commitDirty: true }).textContent)
+      .toContain('built from commit 0123456 with uncommitted changes.');
+    const unknown = createAboutDialog({ version: '1.2.3', commit: '', commitDirty: false });
+    expect(unknown.textContent).toContain('Version 1.2.3.');
+    expect(unknown.querySelector(`a[href*="/tree/"]`)).toBeNull();
+  });
 });
 
 describe('rules dialog', () => {
